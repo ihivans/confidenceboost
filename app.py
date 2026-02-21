@@ -1,10 +1,16 @@
 import os
+import json
+import re
+from flask import Flask, request, jsonify
 from groq import Groq
+from dotenv import load_dotenv
 
-# Initialize Groq client
+load_dotenv()
+
+app = Flask(__name__)
+
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# XP Map
 TASK_XP = {
     "solve_leetcode": 50,
     "attend_hackathon": 150,
@@ -14,54 +20,69 @@ TASK_XP = {
 }
 
 
-def analyze_confidence_and_assign_tasks(user_answers: dict):
-    """
-    user_answers = {
-        "q1": "Yes, but I feel scared sometimes",
-        "q2": "No, I avoid presentations",
-        ...
-    }
-    """
+@app.route("/analyze-confidence", methods=["POST"])
+def analyze_confidence():
+
+    user_answers = request.get_json()
+
+    if not user_answers:
+        return jsonify({"error": "No user answers provided"}), 400
 
     prompt = f"""
-    You are an AI confidence mentor for women in tech.
+    You are an AI mentor helping women gain confidence in tech.
 
-    Analyze the following answers and return:
+    Based on the answers provided:
+    1. Analyze confidence level (Low / Medium / High)
+    2. Provide 3-5 personalized improvement suggestions
+    3. Recommend tasks ONLY from this list:
+       - solve_leetcode
+       - attend_hackathon
+       - apply_internship
+       - give_presentation
+       - build_project
 
-    1. Confidence Level (Low / Medium / High)
-    2. Main Weak Areas
-    3. Suggested Tasks (choose from: solve_leetcode, attend_hackathon, apply_internship, give_presentation, build_project)
+    Return STRICT JSON in this format:
+
+    {{
+        "confidence_level": "",
+        "improvement_suggestions": [],
+        "recommended_tasks": []
+    }}
 
     User Answers:
     {user_answers}
-
-    Return output strictly in JSON format like:
-    {{
-        "confidence_level": "",
-        "weak_areas": [],
-        "suggested_tasks": []
-    }}
     """
 
-    response = client.chat.completions.create(
-        model="llama3-70b-8192",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
-    )
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
+        )
 
-    result = response.choices[0].message.content
+        raw_output = response.choices[0].message.content.strip()
 
-    return result
+        # 🔥 Clean possible markdown formatting
+        cleaned_output = re.sub(r"```json|```", "", raw_output).strip()
+
+        parsed_output = json.loads(cleaned_output)
+
+        # Final structured response
+        final_response = {
+            "selected_answers": user_answers,
+            "confidence_level": parsed_output.get("confidence_level"),
+            "improvement_suggestions": parsed_output.get("improvement_suggestions", []),
+            "recommended_tasks": parsed_output.get("recommended_tasks", [])
+        }
+
+        return jsonify(final_response)
+
+    except Exception as e:
+        return jsonify({
+            "error": "Failed to analyze confidence",
+            "details": str(e)
+        }), 500
 
 
-def calculate_xp(completed_tasks: list):
-    """
-    completed_tasks = ["solve_leetcode", "give_presentation"]
-    """
-
-    total_xp = 0
-
-    for task in completed_tasks:
-        total_xp += TASK_XP.get(task, 0)
-
-    return total_xp
+if __name__ == "__main__":
+    app.run(debug=True)

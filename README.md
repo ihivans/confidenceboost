@@ -2,27 +2,29 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# 🎯 confidher
 
 ## Basic Details
-
-### Team Name: [Name]
+CONFIDHER is a gamified web app that helps girls in tech build confidence by completing small growth tasks and earning XP. It tracks progress, provides personalized recommendations, and connects users to mentorship and opportunities.
+### Team Name: velvet voltage
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: Shivani K - TIST
+- Member 2: Taniya Tolson - TIST
 
 ### Hosted Project Link
-[mention your project hosted link here]
+https://confidenceboost-u5d6.vercel.app/
+
 
 ### Project Description
-[2-3 lines about what your project does]
+CONFIDHER is a gamified web app that helps girls in tech build confidence by completing small growth tasks and earning XP. It tracks progress, provides personalized recommendations, and connects users to mentorship and opportunities.
 
 ### The Problem statement
-[What problem are you solving?]
+Many girls in tech struggle with imposter syndrome, lack of mentorship, and not having a clear way to track their growth. This leads to low confidence and missed opportunities despite having strong potential.
+
 
 ### The Solution
-[How are you solving it?]
+Our solution is CONFIDHER, a gamified web app that turns small learning and career actions into XP rewards. It helps girls track their progress, build confidence consistently, and access mentorship and opportunities in one supportive platform. 
 
 ---
 
@@ -31,10 +33,10 @@
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
+- Languages used:  JavaScript, Python, css,html
+- Frameworks used: flask
+- Libraries used: flask
+- Tools used:  VS Code, Git, AI tools
 
 **For Hardware:**
 - Main components: [List main components]
@@ -46,10 +48,10 @@
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: XP-Based Gamification – Users earn experience points for completing growth-oriented tasks.
+- Feature 2: Personalized Task Recommendations – Survey responses are analyzed to assign tailored tasks
+- Feature 3: Progress Dashboard – Displays total XP, completed tasks, and growth tracking.
+- Feature 4: Survey-Based User Profiling – Collects user goals, confidence level, and interests to customize their experience. 
 
 ---
 

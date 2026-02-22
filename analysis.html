@@ -1,61 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Your Confidence Analysis</title>
+    <title>BoostHer XP - Confidence Analysis</title>
 
-<link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+        .container {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
+        h2 {
+            text-align: center;
+            color: #7c3aed;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 18px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        #confidenceFill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            transition: 0.6s ease;
+        }
+
+        .xp-box {
+            background: #f5f3ff;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #6d28d9;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        li:hover {
+            background: #f3f0ff;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #6d28d9;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+    </style>
 </head>
 
-<body class="survey-bg">
+<body onload="loadAnalysis()">
 
-<header class="top-header">
-<h1>CONFIDHER</h1>
-<p>Your Confidence Growth Report</p>
-</header>
+    <div class="container">
 
-<section class="container">
+        <h2>💜 Your Confidence Analysis</h2>
 
-<div class="card result-box">
+        <p id="confidenceText" class="small-text"></p>
 
-<h2>Your Current Confidence</h2>
+        <div class="progress-container">
+            <div id="confidenceFill"></div>
+        </div>
 
-<div class="confidence-bar">
-<div id="confidenceFill"></div>
-</div>
+        <div class="xp-box">
+            XP Points: <span id="xpPoints">0</span>
+        </div>
 
-<p id="confidenceText"></p>
+        <h3>✨ Recommended Tasks</h3>
+        <ul id="tasks"></ul>
 
-</div>
+        <h3>🌱 Improvement Suggestions</h3>
+        <ul id="improveList"></ul>
 
-<div class="card">
+        <h3>📋 Your Answers</h3>
+        <div id="answers" class="small-text"></div>
 
-<h3>Your Selected Answers</h3>
-<div id="answers"></div>
+        <button onclick="startJourney()">Start Your Growth Journey 🚀</button>
 
-</div>
+    </div>
 
-<div class="card improvement">
-
-<h3>Where You Can Improve</h3>
-<p id="improveText"></p>
-
-</div>
-
-<div class="card">
-
-<h3>Recommended Tasks</h3>
-<ul id="tasks" class="tasks"></ul>
-
-</div>
-
-<button class="main-btn">Start My Growth Journey</button>
-
-</section>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
